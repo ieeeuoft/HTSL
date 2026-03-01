@@ -6,7 +6,7 @@ from django.core.mail import send_mail
 from django_filters import rest_framework as filters
 from django.db import transaction
 from django.http import HttpResponseServerError
-from drf_yasg.utils import swagger_auto_schema
+from drf_spectacular.utils import extend_schema
 from django.template.loader import render_to_string
 
 from rest_framework import generics, mixins, status, permissions
@@ -193,7 +193,7 @@ class OrderListView(generics.ListAPIView):
         return self.list(request, *args, **kwargs)
 
     @transaction.atomic
-    @swagger_auto_schema(responses={201: OrderCreateResponseSerializer})
+    @extend_schema(responses={201: OrderCreateResponseSerializer})
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -353,7 +353,7 @@ class OrderItemReturnView(generics.GenericAPIView):
     )
 
     @transaction.atomic
-    @swagger_auto_schema(responses={201: OrderItemReturnResponseSerializer})
+    @extend_schema(responses={201: OrderItemReturnResponseSerializer})
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)

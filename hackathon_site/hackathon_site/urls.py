@@ -15,29 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf.urls import url
 from django.conf import settings
 
-from drf_yasg.views import get_schema_view
-from drf_yasg import openapi
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 from registration.views import ResumeView
-
-schema_view = get_schema_view(
-    openapi.Info(
-        title="Hardware Hackathon API",
-        default_version="v1",
-        description="API Endpoint Visualization for Hardware Hackathon",
-    ),
-    public=bool(settings.DEBUG),
-)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include("api.urls", namespace="api")),
-    url(
-        r"^swagger/$",
-        schema_view.with_ui("swagger", cache_timeout=0),
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path(
+        "swagger/",
+        SpectacularSwaggerView.as_view(url_name="schema"),
         name="schema-swagger-ui",
     ),
     path("registration/", include("registration.urls", namespace="registration")),

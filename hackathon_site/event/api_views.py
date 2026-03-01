@@ -7,7 +7,7 @@ from django.db.models import Q
 from django.conf import settings
 from django.http import HttpResponseServerError
 from django.template.loader import render_to_string
-from drf_yasg.utils import swagger_auto_schema
+from drf_spectacular.utils import extend_schema
 
 from rest_framework import generics, mixins, status, permissions
 from rest_framework.exceptions import ValidationError, PermissionDenied
@@ -253,7 +253,7 @@ class CurrentProfileView(
     def patch(self, request, *args, **kwargs):
         return self.partial_update(request, *args, **kwargs)
 
-    @swagger_auto_schema(responses={201: ProfileCreateResponseSerializer})
+    @extend_schema(responses={201: ProfileCreateResponseSerializer})
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
