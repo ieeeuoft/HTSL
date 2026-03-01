@@ -5,7 +5,7 @@ channels:
 
 dependencies:
   # Core language and C‑library deps
-  - python=3.9
+  - python>=3.10.19,<3.11
   - libpq
   - psycopg2 # pre‑built, with libpq
   - pip # so we can install the rest via pip
@@ -15,13 +15,11 @@ dependencies:
       - appdirs==1.4.3
       - asgiref==3.8.1
       - attrs==19.3.0
-      - black==19.10b0
+      - black==24.1.0
       - certifi==2020.4.5.1
       - chardet==3.0.4
-      - click==7.1.2
+      - click>=8.0.0
       - confusable-homoglyphs==3.3.1
-      - coreapi==2.3.3
-      - coreschema==0.0.4
       - defusedxml==0.7.1
       - diff-match-patch==20241021
       - dj-rest-auth==1.0.6
@@ -34,9 +32,8 @@ dependencies:
       - django-recaptcha==2.0.6
       - django-redis==4.12.1
       - django-registration==3.1.2
-      - djangorestframework==3.11.2
-      - dotenv==0.9.9
-      - drf-yasg==1.17.1
+      - djangorestframework==3.14.0
+      - drf-spectacular[sidecar]==0.27.2
       - et_xmlfile==2.0.0
       - gunicorn==20.0.4
       - idna==2.9
@@ -46,10 +43,9 @@ dependencies:
       - MarkupSafe==1.1.1
       - odfpy==1.4.1
       - openpyxl==3.1.5
-      - packaging==20.4
-      - pathspec==0.8.0
+      - packaging>=22.0
+      - pathspec==0.9.0
       - Pillow==9.0.1
-      - psycopg2-binary==2.9.10 # optional: you can remove this since conda’s psycopg2 is already installed
       - pyparsing==2.4.7
       - python-dateutil==2.8.2
       - python-dotenv==1.1.0
@@ -59,13 +55,11 @@ dependencies:
       - redis==3.5.3
       - regex==2021.4.4
       - requests==2.25.1
-      - ruamel.yaml==0.16.10
-      - ruamel.yaml.clib==0.2.12
+      - ruamel.yaml==0.17.21
       - six==1.15.0
       - sqlparse==0.3.1
       - tablib==3.7.0
       - toml==0.10.0
-      - typed_ast==1.4.1
       - typing_extensions==4.12.2
       - uritemplate==3.0.1
       - urllib3==1.26.5

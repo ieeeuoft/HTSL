@@ -1,23 +1,21 @@
-version: '3'
+version: "3"
 
 services:
   postgres:
     image: postgres:12.2
-    container_name: aws-hacks_postgres
+    container_name: hackathon-template_postgres
     ports:
       - 5432:5432
     environment:
       - POSTGRES_DB=hackathon_site
-      - POSTGRES_USER=postgres
       - POSTGRES_HOST_AUTH_METHOD=trust
     volumes:
-      - aws-postgres-data:/var/lib/postgresql/data
-
+      - hackathon-template_postgres-data:/var/lib/postgresql/data
   redis:
     image: redis:6-alpine
-    container_name: aws-hacks_redis
+    container_name: hackathon-template_redis
     ports:
       - 6379:6379
 
 volumes:
-  aws-postgres-data:
+  hackathon-template_postgres-data:
