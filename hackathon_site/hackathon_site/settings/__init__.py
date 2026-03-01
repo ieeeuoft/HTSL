@@ -36,7 +36,7 @@ IN_TESTING = False  # Overwritten by hackathon_site.settings.ci
 if DEBUG:
     ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
     INTERNAL_IPS = ["localhost", "127.0.0.1"]
-    CORS_ORIGIN_REGEX_WHITELIST = [
+    CORS_ALLOWED_ORIGIN_REGEXES = [
         r"^https?://localhost:?\d*$",
     ]
     EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
@@ -49,7 +49,7 @@ else:
         "hardware.hackstudentlife.ca",
         "www.hardware.hackstudentlife.ca",
     ]
-    CORS_ORIGIN_REGEX_WHITELIST = [
+    CORS_ALLOWED_ORIGIN_REGEXES = [
         r"^https://(?:www\.)?hackstudentlife\.ca",
         r"^https://(?:www\.)?\w+\.hackstudentlife\.ca",
     ]
@@ -109,7 +109,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "dj_rest_auth",
-    "drf_yasg",
+    "drf_spectacular",
+    "drf_spectacular_sidecar",
     "import_export",
     "django_filters",
     "client_side_image_cropping",
@@ -220,6 +221,7 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "PAGE_SIZE": 1000,
     "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend",],
 }
@@ -238,9 +240,16 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Swagger
-# https://drf-yasg.readthedocs.io/en/stable/settings.html
-SWAGGER_SETTINGS = {"DEFAULT_MODEL_RENDERING": "example", "DEEP_LINKING": True}
+# drf-spectacular
+# https://drf-spectacular.readthedocs.io/en/latest/settings.html
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Hardware Hackathon API",
+    "DESCRIPTION": "API Endpoint Visualization for Hardware Hackathon",
+    "VERSION": "1.0.0",
+    "SWAGGER_UI_DIST": "SIDECAR",
+    "SWAGGER_UI_FAVICON_HREF": "SIDECAR",
+    "REDOC_DIST": "SIDECAR",
+}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -318,12 +327,12 @@ DEFAULT_FROM_EMAIL = "hello@hackstudentlife.ca"
 CONTACT_EMAIL = DEFAULT_FROM_EMAIL
 HSS_ADMIN_EMAIL = "hardware@hackstudentlife.ca"
 
-REGISTRATION_OPEN_DATE = datetime(2024, 3, 1, tzinfo=TZ_INFO)
-REGISTRATION_CLOSE_DATE = datetime(2024, 3, 8, 23, 59, 0, tzinfo=TZ_INFO)
-EVENT_START_DATE = datetime(2024, 3, 22, 7, 30, 0, tzinfo=TZ_INFO)
-EVENT_END_DATE = datetime(2024, 3, 22, 18, 0, 0, tzinfo=TZ_INFO)
-HARDWARE_SIGN_OUT_START_DATE = datetime(2020, 9, 1, tzinfo=TZ_INFO)
-HARDWARE_SIGN_OUT_END_DATE = datetime(2024, 9, 30, tzinfo=TZ_INFO)
+REGISTRATION_OPEN_DATE = datetime(2026, 2, 1, tzinfo=TZ_INFO)
+REGISTRATION_CLOSE_DATE = datetime(2026, 3, 1, 23, 59, 0, tzinfo=TZ_INFO)
+EVENT_START_DATE = datetime(2026, 3, 22, 7, 30, 0, tzinfo=TZ_INFO)
+EVENT_END_DATE = datetime(2026, 3, 22, 18, 0, 0, tzinfo=TZ_INFO)
+HARDWARE_SIGN_OUT_START_DATE = datetime(2026, 9, 1, tzinfo=TZ_INFO)
+HARDWARE_SIGN_OUT_END_DATE = datetime(2026, 9, 30, tzinfo=TZ_INFO)
 
 # Registration user requirements
 MINIMUM_AGE = 18
