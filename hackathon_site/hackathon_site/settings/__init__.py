@@ -44,22 +44,22 @@ if DEBUG:
 else:
     # NOTE: If you aren't ieee uoft, put your websites here
     ALLOWED_HOSTS = [
-        "hackstudentlife.ca",
-        "www.hackstudentlife.ca",
-        "hardware.hackstudentlife.ca",
-        "www.hardware.hackstudentlife.ca",
+        "hackthestudentlife.ca",
+        "www.hackthestudentlife.ca",
+        "hardware.hackthestudentlife.ca",
+        "www.hardware.hackthestudentlife.ca",
     ]
     CORS_ALLOWED_ORIGIN_REGEXES = [
-        r"^https://(?:www\.)?hackstudentlife\.ca",
-        r"^https://(?:www\.)?\w+\.hackstudentlife\.ca",
+        r"^https://(?:www\.)?hackthestudentlife\.ca",
+        r"^https://(?:www\.)?\w+\.hackthestudentlife\.ca",
     ]
-    HSS_URL = "https://hardware.hackstudentlife.ca/"
-    CSRF_COOKIE_DOMAIN = ".hackstudentlife.ca"
+    HSS_URL = "https://hardware.hackthestudentlife.ca/"
+    CSRF_COOKIE_DOMAIN = ".hackthestudentlife.ca"
     CSRF_TRUSTED_ORIGINS = [
-        "hackstudentlife.ca",
-        "www.hackstudentlife.ca",
-        "hardware.hackstudentlife.ca",
-        "www.hardware.hackstudentlife.ca",
+        "hackthestudentlife.ca",
+        "www.hackthestudentlife.ca",
+        "hardware.hackthestudentlife.ca",
+        "www.hardware.hackthestudentlife.ca",
     ]
     EMAIL_HOST = os.environ.get("EMAIL_HOST", None)
     EMAIL_PORT = os.environ.get("EMAIL_PORT", None)
