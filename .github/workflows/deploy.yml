@@ -24,6 +24,8 @@ jobs:
           GITHUB_SHA_SHORT=$(echo ${{ github.sha }} | cut -c1-7)
           echo "GITHUB_SHA_SHORT=${GITHUB_SHA_SHORT}" >> $GITHUB_ENV
           echo "::set-output name=GITHUB_SHA_SHORT::${GITHUB_SHA_SHORT}"
+      - name: Set lowercase image name
+        run: echo "IMAGE_NAME_LOWER=$(echo '${{ env.IMAGE_NAME }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
       - name: Build image
         run: docker compose -f deployment/docker-compose.ci.yml build
       - name: Docker login
@@ -49,6 +51,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: Set lowercase image name
+        run: echo "IMAGE_NAME_LOWER=$(echo '${{ env.IMAGE_NAME }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
       - name: Set up Python 3.9
         uses: actions/setup-python@v1
         with:
@@ -139,6 +143,6 @@ jobs:
           # TODO: It would be better to use docker-compose against the django service,
           # but there is currently a bug in docker-compose preventing running services
           # over an SSH host.
-          IMAGE=${REGISTRY}/${IMAGE_NAME}/django:${GITHUB_SHA_SHORT}
+          IMAGE=${REGISTRY}/${IMAGE_NAME_LOWER}/django:${GITHUB_SHA_SHORT}
           docker run --rm --env-file .env ${IMAGE} python manage.py migrate
           echo "Deployment complete"
